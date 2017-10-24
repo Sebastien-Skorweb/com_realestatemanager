@@ -3443,7 +3443,7 @@ static function showRentRequestThanks($params, $backlink, $currentcat, $houseid=
                             url: "index.php?option=com_realestatemanager&task=ajax_update_check_payment",
                             data : 'order_id=' + order_id,
                             success: function( data ) {
-                              jQuerREL("#response-cheque").html(data);
+                              jQuerREL("#response-cheque").append(data);
                             }
                           });
                          }
