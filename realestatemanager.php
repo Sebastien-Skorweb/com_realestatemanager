@@ -3494,8 +3494,11 @@ static function ajax_update_check_payment(){
     $database->query();   
 
     $query = "UPDATE `val_rem_orders_details` SET `status` = 'En attente du chèque' WHERE `val_rem_orders`.`fk_order_id` =" . $order_id;
-    val_rem_orders_details
-    echo "Nous validerons votre réservation lors de la récéption de votre chèque.";  
+    $database->setQuery($query);
+    $database->query();   
+    
+    JHTML::_('behavior.modal');
+    echo'<a href="#leftcolumn" class="modal">Nous validerons votre réservation lors de la récéption de votre chèque.</a>';
 }
 
 static function saveHouse($option, $id) {
