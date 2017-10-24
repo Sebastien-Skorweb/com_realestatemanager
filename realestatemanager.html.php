@@ -3444,7 +3444,7 @@ static function showRentRequestThanks($params, $backlink, $currentcat, $houseid=
                             data : 'order_id=' + order_id,
                             success: function() {
                               //jQuerREL("#response-cheque").html(data);
-                              var html = '<a href="#leftcolumn" class="modal modal-cheque"><h4>Réservation en cours</h4><p>Nous validerons votre réservation lors de la récéption de votre chèque. Si toutefois entre temps une réservation à lieu via paypal pour les mêmes dates de réservation que les vôtres, nous serions malheuresement contraints d\'annuler votre demande de réservation.</p></a>';
+                              var html = '<a href="#paiement-par-cheque" class="modal modal-cheque"><h4>Réservation en cours</h4><p>Nous validerons votre réservation lors de la récéption de votre chèque. Si toutefois entre-temps une réservation à lieu via paypal pour les mêmes dates de réservation que les vôtres, nous serions malheuresement contraints d\'annuler votre demande de réservation.</p></a>';
                               jQuerREL("#response-cheque").html(html);
 
                             }
