@@ -10,6 +10,7 @@ if (!defined('_VALID_MOS') && !defined('_JEXEC'))
  *
  *
  */
+//Commentataire de test
 global $hide_js, $mainframe, $Itemid, $realestatemanager_configuration, 
 $mosConfig_live_site, $mosConfig_absolute_path, $my, $doc, $arr, $acl,$langContent;
 
