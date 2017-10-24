@@ -12,7 +12,7 @@ if (!defined('_VALID_MOS') && !defined('_JEXEC'))
 jimport( 'joomla.plugin.helper' );
 if (version_compare(JVERSION, "3.0.0", "lt"))
   jimport('joomla.html.toolbar');
-
+JHTML::_('behavior.modal');
 require_once($mosConfig_absolute_path . "/components/com_realestatemanager/functions.php");
 require_once($mosConfig_absolute_path . "/components/com_realestatemanager/realestatemanager.php");
 //require_once($mosConfig_absolute_path."/administrator/components/com_realestatemanager/menubar_ext.php");
@@ -3442,22 +3442,31 @@ static function showRentRequestThanks($params, $backlink, $currentcat, $houseid=
                             type: "POST",
                             url: "index.php?option=com_realestatemanager&task=ajax_update_check_payment",
                             data : 'order_id=' + order_id,
-                            success: function( data ) {
-                              jQuerREL("#response-cheque").append(data);
+                            success: function() {
+                              //jQuerREL("#response-cheque").html(data);
+                              var html = '<a href="#leftcolumn" class="modal modal-cheque"><h4>Réservation en cours</h4><p>Nous validerons votre réservation lors de la récéption de votre chèque. Si toutefois entre temps une réservation à lieu via paypal pour les mêmes dates de réservation que les vôtres, nous serions malheuresement contraints d\'annuler votre demande de réservation.</p></a>';
+                              jQuerREL("#response-cheque").html(html);
+
                             }
                           });
                          }
-                       </script>
-                     </form>
-                     <p id="response-cheque"></p>
-                   </div>
-                 </div>
-                 <?php
+                         jQuerREL('html').click(function() {
+                          jQuerREL(".modal-cheque").hide();
+                        });
+                         jQuerREL(".modal-cheque").click(function(event){
+                          event.stopPropagation();
+                        });
+                      </script>
+                    </form>
+                    <p id="response-cheque"></p>
+                  </div>
+                </div>
+                <?php
 
 
-               }
+              }
 //********************************************************************************************************
-               static function getSaleForm($realestate,$realestatemanager_configuration){
+              static function getSaleForm($realestate,$realestatemanager_configuration){
                 if($realestate){
                   getHTMLPayPalRM($realestate,$realestatemanager_configuration['plugin_name_select']);
                 }
