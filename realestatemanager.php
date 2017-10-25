@@ -32,7 +32,7 @@ require_once($mosConfig_absolute_path . "/components/com_realestatemanager/compa
 if (version_compare(JVERSION, "3.0.0", "lt"))
     include_once($mosConfig_absolute_path . '/libraries/joomla/application/pathway.php'); // for 1.6
 include_once($mosConfig_absolute_path .
-   '/components/com_realestatemanager/realestatemanager.main.categories.class.php');
+ '/components/com_realestatemanager/realestatemanager.main.categories.class.php');
 jimport('joomla.application.pathway');
 jimport('joomla.html.pagination');
 jimport('joomla.filesystem.folder');
@@ -45,34 +45,34 @@ require_once($mosConfig_absolute_path .
   "/components/com_realestatemanager/captcha.php");
 /** load the html drawing class */
 require_once ($mosConfig_absolute_path .
-   "/components/com_realestatemanager/realestatemanager.class.rent.php");
+ "/components/com_realestatemanager/realestatemanager.class.rent.php");
 require_once ($mosConfig_absolute_path .
  "/components/com_realestatemanager/realestatemanager.html.php"); // for 1.6
 require_once ($mosConfig_absolute_path .
  "/components/com_realestatemanager/realestatemanager.class.php"); // for 1.6
 require_once ($mosConfig_absolute_path .
-   "/components/com_realestatemanager/realestatemanager.class.rent_request.php");
+ "/components/com_realestatemanager/realestatemanager.class.rent_request.php");
 require_once ($mosConfig_absolute_path .
-   "/components/com_realestatemanager/realestatemanager.class.buying_request.php");
+ "/components/com_realestatemanager/realestatemanager.class.buying_request.php");
 require_once ($mosConfig_absolute_path .
-   "/components/com_realestatemanager/realestatemanager.class.rent.php");
+ "/components/com_realestatemanager/realestatemanager.class.rent.php");
 require_once ($mosConfig_absolute_path .
-   "/components/com_realestatemanager/realestatemanager.class.review.php");
+ "/components/com_realestatemanager/realestatemanager.class.review.php");
 require_once ($mosConfig_absolute_path .
-   "/administrator/components/com_realestatemanager/realestatemanager.class.others.php");
+ "/administrator/components/com_realestatemanager/realestatemanager.class.others.php");
 //added 2012_06_05 that's because it doesn't work with enabled plugin System-Legacy, so if it works, let it work :)
 require_once($mosConfig_absolute_path .
-   "/components/com_realestatemanager/functions.php");
+ "/components/com_realestatemanager/functions.php");
 require_once($mosConfig_absolute_path .
-   "/components/com_realestatemanager/includes/menu.php");
+ "/components/com_realestatemanager/includes/menu.php");
 
 require_once ($mosConfig_absolute_path .
-   "/administrator/components/com_realestatemanager/realestatemanager.class.impexp.php");
+ "/administrator/components/com_realestatemanager/realestatemanager.class.impexp.php");
 
 //added 2012_06_05 that's because it doesn't work with enabled plugin System-Legacy, so if it works, let it work :)
 if (!array_key_exists('realestatemanager_configuration', $GLOBALS)) {
     require_once ($mosConfig_absolute_path .
-       "/administrator/components/com_realestatemanager/realestatemanager.class.conf.php");
+     "/administrator/components/com_realestatemanager/realestatemanager.class.conf.php");
     $GLOBALS['realestatemanager_configuration'] = $realestatemanager_configuration;
 } else
 global $realestatemanager_configuration;
@@ -85,7 +85,7 @@ else
 if (isset($option) && $option == "com_simplemembership") {
     if (!array_key_exists('user_configuration2', $GLOBALS)) {
         require_once (JPATH_SITE . DS . 'administrator' . DS . 'components' . DS .
-           'com_simplemembership' . DS . 'admin.simplemembership.class.conf.php');
+         'com_simplemembership' . DS . 'admin.simplemembership.class.conf.php');
         $GLOBALS['user_configuration2'] = $user_configuration;
     } else {
         global $user_configuration;
@@ -148,43 +148,43 @@ if ((!isset($task) OR $task == '') AND isset($view))
 //     $GLOBALS['task'] = $task = protectInjectionWithoutQuote('start', '');
 // }
 
-if ( (!isset($task) OR $task == '' ) && (!isset($view) OR $view == '') ){
-    $app = new JSite();
-    $menu = $app->getMenu() ;
-    $item  = $menu->getActive();
-    if( isset($item) ) $GLOBALS['task'] = $task = $item->query['view'];
-}
+    if ( (!isset($task) OR $task == '' ) && (!isset($view) OR $view == '') ){
+        $app = new JSite();
+        $menu = $app->getMenu() ;
+        $item  = $menu->getActive();
+        if( isset($item) ) $GLOBALS['task'] = $task = $item->query['view'];
+    }
 
-if (isset($_REQUEST['submit']) && $_REQUEST['submit'] == "[ Rent Request ]")
-    $task = "rent_request";
+    if (isset($_REQUEST['submit']) && $_REQUEST['submit'] == "[ Rent Request ]")
+        $task = "rent_request";
 
-if ($realestatemanager_configuration['debug'] == '1') {
-    echo "Task: " . $task . "<br />";
-    print_r($_REQUEST);
-    echo "<hr /><br />";
-}
+    if ($realestatemanager_configuration['debug'] == '1') {
+        echo "Task: " . $task . "<br />";
+        print_r($_REQUEST);
+        echo "<hr /><br />";
+    }
 
-$bid = mosGetParam($_REQUEST, 'bid', array(0));
+    $bid = mosGetParam($_REQUEST, 'bid', array(0));
 // -
-if(isset($_REQUEST["bid"]) AND isset ($_REQUEST["rent_from"]) AND isset($_REQUEST["rent_until"])){
+    if(isset($_REQUEST["bid"]) AND isset ($_REQUEST["rent_from"]) AND isset($_REQUEST["rent_until"])){
 
-    $bid_ajax_rent = $_REQUEST["bid"];
-    $rent_from = $_REQUEST["rent_from"];
-    $rent_until = $_REQUEST["rent_until"];
-    $week = $_REQUEST["week"];
-    
-    if(isset($_REQUEST["special_price"])){
-     $special_price = $_REQUEST["special_price"]; 
- }
- if(isset($_REQUEST["currency_spacial_price"])){
-     $currency_spacial_price = $_REQUEST["currency_spacial_price"];
- }  
+        $bid_ajax_rent = $_REQUEST["bid"];
+        $rent_from = $_REQUEST["rent_from"];
+        $rent_until = $_REQUEST["rent_until"];
+        $week = $_REQUEST["week"];
 
- if(isset($_REQUEST["comment_price"])){
-    $comment_price = $_REQUEST["comment_price"];
-} else {
-    $comment_price = '';
-}
+        if(isset($_REQUEST["special_price"])){
+           $special_price = $_REQUEST["special_price"]; 
+       }
+       if(isset($_REQUEST["currency_spacial_price"])){
+           $currency_spacial_price = $_REQUEST["currency_spacial_price"];
+       }  
+
+       if(isset($_REQUEST["comment_price"])){
+        $comment_price = $_REQUEST["comment_price"];
+    } else {
+        $comment_price = '';
+    }
 }
 // print_r($task);exit;
 switch ($task) {
@@ -1019,7 +1019,7 @@ static function saveRentRequest($option, $bids) {
     if ($realestatemanager_configuration['rentrequest_email']['show']) {
         $params->def('show_email', 1);
         if (checkAccess_REM($realestatemanager_configuration['rentrequest_email']['registrationlevel'],
-           'NORECURSE', userGID_REM($my->id), $acl)) {
+         'NORECURSE', userGID_REM($my->id), $acl)) {
             $params->def('show_input_email', 1);
     }
 }
@@ -1027,7 +1027,7 @@ static function saveRentRequest($option, $bids) {
 if ($realestatemanager_configuration['paypal_buy_status']['show']) {
     $params->def('paypal_buy_status', 1);
     if (checkAccess_REM($realestatemanager_configuration['paypal_buy']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('paypal_buy_status_rl', 1);
 }
 }
@@ -1051,21 +1051,32 @@ if ($params->get('show_input_email')) {
             $mail_to[] = $item_house[0]->owneremail;
 
         if (count($mail_to) > 0)
-            $username = (isset($item_user[0]->name)) ? $item_user[0]->name : _REALESTATE_MANAGER_LABEL_ANONYMOUS;
+
+            $username =  $_POST['user_name'];
+        $user_email = $_POST['user_email'];
+        $user_mailing = $_POST['user_mailing'];
+        $rent_from = $_POST['rent_from'];
+        $rent_until = $_POST['rent_until'];
+        $week = $_POST['week'];
+        $price=$_POST['calculated_price'];
+        $acompte=$_POST['calculated_price']*0.30;
         $message = str_replace("{username}", $username, _REALESTATE_MANAGER_EMAIL_NOTIFICATION_RENT_REQUEST);
         $message = str_replace("{hid_value}", $item_house[0]->houseid, $message);
         $message = str_replace("{user_name}", $rent_request->user_name, $message);
-        $message = str_replace("{user_email}", $rent_request->user_email, $message);
-        $message = str_replace("{user_mailing}", $rent_request->user_mailing, $message);
-        $message = str_replace("{rent_from}", $rent_request->rent_from, $message);
-        $message = str_replace("{rent_until}", $rent_request->rent_until, $message);
+        $message = str_replace("{user_email}",  $user_email, $message);
+        $message = str_replace("{user_mailing}", $user_mailing, $message);
+        $message = str_replace("{price}", $price, $message);
+        $message = str_replace("{acompte}", $acompte, $message);
+        $message = str_replace("{week}", $week, $message);
+        $message = str_replace("{rent_from}",  $rent_from, $message);
+        $message = str_replace("{rent_until}",  $rent_until, $message);
         $message = str_replace("{house_title}", $item_house[0]->htitle, $message);
         if ($userid == 0) {
             mosMail($mosConfig_mailfrom, _REALESTATE_MANAGER_LABEL_ANONYMOUS, $mail_to,
-               _REALESTATE_MANAGER_NEW_RENT_REQUEST_ADDED, $message, true);
+             _REALESTATE_MANAGER_NEW_RENT_REQUEST_ADDED, $message, true);
         } else {
             mosMail($mosConfig_mailfrom, $item_user[0]->name, $mail_to,
-               _REALESTATE_MANAGER_NEW_RENT_REQUEST_ADDED, $message, true);
+             _REALESTATE_MANAGER_NEW_RENT_REQUEST_ADDED, $message, true);
         }
     }
 }
@@ -1147,7 +1158,7 @@ static function saveBuyingRequest($option, $bids) {
 
         if (!($realestatemanager_configuration['buystatus']['show']) ||
             !checkAccess_REM($realestatemanager_configuration['buyrequest']['registrationlevel'],
-               'NORECURSE', userGID_REM($my->id), $acl)) {
+             'NORECURSE', userGID_REM($my->id), $acl)) {
             echo _REALESTATE_MANAGER_NOT_AUTHORIZED;
         return;
     }
@@ -1199,14 +1210,14 @@ static function saveBuyingRequest($option, $bids) {
     if (($realestatemanager_configuration['buyingrequest_email']['show'])) {
         $params->def('show_email', 1);
         if (checkAccess_REM($realestatemanager_configuration['buyingrequest_email']['registrationlevel'],
-           'NORECURSE', userGID_REM($my->id), $acl))
+         'NORECURSE', userGID_REM($my->id), $acl))
             $params->def('show_input_email', 1);
     }
 
     if ($realestatemanager_configuration['paypal_buy_status_sale']['show']) {
         $params->def('paypal_buy_status', 2);
         if (checkAccess_REM($realestatemanager_configuration['paypal_buy_sale']['registrationlevel'],
-           'NORECURSE', userGID_REM($my->id), $acl)) {
+         'NORECURSE', userGID_REM($my->id), $acl)) {
             $params->def('paypal_buy_status_rl', 2);
     }
 }
@@ -1242,10 +1253,10 @@ if ($params->get('show_input_email')) {
             $message = str_replace("{house_title}", $item_house[0]->htitle, $message);
             if ($userid == 0) {
                 mosMail($mosConfig_mailfrom, _REALESTATE_MANAGER_LABEL_ANONYMOUS, $mail_to,
-                   _REALESTATE_MANAGER_BUYING_REQUEST_ADDED, $message, true);
+                 _REALESTATE_MANAGER_BUYING_REQUEST_ADDED, $message, true);
             } else {
                 mosMail($mosConfig_mailfrom, $item_user[0]->name, $mail_to,
-                   _REALESTATE_MANAGER_BUYING_REQUEST_ADDED, $message, true);
+                 _REALESTATE_MANAGER_BUYING_REQUEST_ADDED, $message, true);
             }
         }
     }
@@ -1270,8 +1281,8 @@ static function showRentRequest($option, $bid) {  exit;
         // --
 
     if (!($realestatemanager_configuration['rentstatus']['show']) ||
-       !checkAccess_REM($realestatemanager_configuration['rentrequest']['registrationlevel'],
-          'NORECURSE', userGID_REM($my->id), $acl)) {
+     !checkAccess_REM($realestatemanager_configuration['rentrequest']['registrationlevel'],
+      'NORECURSE', userGID_REM($my->id), $acl)) {
         echo _REALESTATE_MANAGER_NOT_AUTHORIZED;
     return;
 }
@@ -1310,7 +1321,7 @@ $currentcat->header = $params->get('header');
 $tabclass = array('sectiontableentry1', 'sectiontableentry2');
 
 HTML_realestatemanager::showRentRequest($houses, $currentcat, $params, $tabclass,
-   $catid, $sub_categories, false, $option);
+ $catid, $sub_categories, false, $option);
 }
 
     /**
@@ -1322,8 +1333,8 @@ HTML_realestatemanager::showRentRequest($houses, $currentcat, $params, $tabclass
         global $mosConfig_mailfrom, $session, $option;
 
         if (!($realestatemanager_configuration['reviews']['show']) ||
-           !checkAccess_REM($realestatemanager_configuration['reviews']['registrationlevel'],
-              'NORECURSE', userGID_REM($my->id), $acl)) {
+         !checkAccess_REM($realestatemanager_configuration['reviews']['registrationlevel'],
+          'NORECURSE', userGID_REM($my->id), $acl)) {
             echo _REALESTATE_MANAGER_NOT_AUTHORIZED;
         return;
     }
@@ -1331,7 +1342,7 @@ HTML_realestatemanager::showRentRequest($houses, $currentcat, $params, $tabclass
         //************publish_on_review begin
     if ($realestatemanager_configuration['publish_on_review']['show']) {
         if (checkAccess_REM($realestatemanager_configuration['publish_on_review']['registrationlevel'],
-           'NORECURSE', userGID_REM($my->id), $acl)) {
+         'NORECURSE', userGID_REM($my->id), $acl)) {
             $review->published = 1;
     }
     else
@@ -1381,11 +1392,11 @@ $menu->load($Itemid);
 $params = new mosParameters($menu->params);
 
 if (($realestatemanager_configuration['review_added_email']['show']) &&
-   trim($realestatemanager_configuration['review_email']['address']) != "") {
+ trim($realestatemanager_configuration['review_email']['address']) != "") {
 
     $params->def('show_email', 1);
 if (checkAccess_REM($realestatemanager_configuration['review_added_email']['registrationlevel'],
-   'NORECURSE', userGID_REM($my->id), $acl)) {
+ 'NORECURSE', userGID_REM($my->id), $acl)) {
     $params->def('show_input_email', 1);
 }
 }
@@ -1414,7 +1425,7 @@ if ($params->get('show_input_email')) {
         //********************   end add send mail for admin ************
         //showing the original entries
 mosRedirect("index.php?option=" . $option . "&task=view_house&catid=" . intval($_POST['catid'])
-   . "&id=$review->fk_houseid&Itemid=$Itemid");
+ . "&id=$review->fk_houseid&Itemid=$Itemid");
 }
 
 static function link_import($option) {
@@ -1456,29 +1467,29 @@ static function updateMap($option){
       clearstatcache();
       $ret = time() - filemtime($logPath) ;
       if($ret < 600){
-       echo "updateMap  exit, file accessed : " . $ret ."seconds ago <br />";
-       file_put_contents($logPath, "updateMap exit, file accessed : " . $ret ."seconds ago  \n\n",  FILE_APPEND );
-       exit ;
+         echo "updateMap  exit, file accessed : " . $ret ."seconds ago <br />";
+         file_put_contents($logPath, "updateMap exit, file accessed : " . $ret ."seconds ago  \n\n",  FILE_APPEND );
+         exit ;
 
-   }
-} 
-
-
-file_put_contents($logPath, "   updateMap start  ".time()." \n",  FILE_APPEND );
+     }
+ } 
 
 
-$api_key = $realestatemanager_configuration['api_key'];
+ file_put_contents($logPath, "   updateMap start  ".time()." \n",  FILE_APPEND );
+
+
+ $api_key = $realestatemanager_configuration['api_key'];
 
 // SELECT count(*)
 //  FROM zm8wo_rem_houses AS h 
 //  WHERE h.hlatitude = '' AND h.hlongitude = ''
 
-$query = "SELECT h.id,h.hlocation,h.hcountry,h.hregion,h.hcity "
-. "\n FROM #__rem_houses AS h"
-. "\n WHERE h.hlatitude = '' AND h.hlongitude = '' "
-. "\n ORDER BY h.id ASC LIMIT 1000";
-$database->setQuery($query);
-$datas = $database->loadObjectList();
+ $query = "SELECT h.id,h.hlocation,h.hcountry,h.hregion,h.hcity "
+ . "\n FROM #__rem_houses AS h"
+ . "\n WHERE h.hlatitude = '' AND h.hlongitude = '' "
+ . "\n ORDER BY h.id ASC LIMIT 1000";
+ $database->setQuery($query);
+ $datas = $database->loadObjectList();
 
     if (!file_exists($logPath)) exit; //remove file and break import
     file_put_contents($logPath," updateMap 2 " . count($datas) . "  ".time()." \n\n",  FILE_APPEND );
@@ -1557,7 +1568,7 @@ static function constructPathway($cat) {
         while ($pid != 0) {
             $cat = @$rows[$pid];
             $pathway[] = sefRelToAbs('index.php?option=' . $option .
-               '&task=showCategory&catid=' . @$cat->id . '&Itemid=' . $Itemid);
+             '&task=showCategory&catid=' . @$cat->id . '&Itemid=' . $Itemid);
             $pathway_name[] = @$cat->title;
             $pid = @$cat->parent_id;
         }
@@ -1785,7 +1796,7 @@ static function constructPathway($cat) {
         // wish list
         if (($realestatemanager_configuration['wishlist']['show'])) {
             if (checkAccess_REM($realestatemanager_configuration['wishlist']['registrationlevel'],
-               'RECURSE', userGID_REM($my->id), $acl)) {
+             'RECURSE', userGID_REM($my->id), $acl)) {
                 $params->def('show_add_to_wishlist', 1);
         }
     }      
@@ -1793,7 +1804,7 @@ static function constructPathway($cat) {
     if ($realestatemanager_configuration['search_option']['show']) {
         $params->def('search_option', 1);
         if (checkAccess_REM($realestatemanager_configuration['search_option']['registrationlevel'],
-           'NORECURSE', userGID_REM($my->id), $acl)) {
+         'NORECURSE', userGID_REM($my->id), $acl)) {
             $params->def('search_option_registrationlevel', 1);
     }
 }
@@ -1801,7 +1812,7 @@ static function constructPathway($cat) {
 
 if (($realestatemanager_configuration['rentstatus']['show'])) {
     if (checkAccess_REM($realestatemanager_configuration['rentrequest']['registrationlevel'],
-       'RECURSE', userGID_REM($my->id), $acl)) {
+     'RECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_rentstatus', 1);
     $params->def('show_rentrequest', 1);
 }
@@ -1810,14 +1821,14 @@ if (($realestatemanager_configuration['rentstatus']['show'])) {
 if ($realestatemanager_configuration['housestatus']['show']) {
     $params->def('show_housestatus', 1);
     if (checkAccess_REM($realestatemanager_configuration['houserequest']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_houserequest', 1);
 }
 }
 if ($realestatemanager_configuration['price']['show']) {
     $params->def('show_pricestatus', 1);
     if (checkAccess_REM($realestatemanager_configuration['price']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_pricerequest', 1);
 }
 }
@@ -1826,7 +1837,7 @@ if ($realestatemanager_configuration['price']['show']) {
 if (($realestatemanager_configuration['print_pdf']['show'])) {
     $params->def('show_print_pdf', 1);
     if (checkAccess_REM($realestatemanager_configuration['print_pdf']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_input_print_pdf', 1);
 }
 }
@@ -1835,7 +1846,7 @@ if (($realestatemanager_configuration['print_pdf']['show'])) {
 if ($realestatemanager_configuration['print_view']['show']) {
     $params->def('show_print_view', 1);
     if (checkAccess_REM($realestatemanager_configuration['print_view']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_input_print_view', 1);
 }
 }
@@ -1844,7 +1855,7 @@ if ($realestatemanager_configuration['print_view']['show']) {
 if ($realestatemanager_configuration['mail_to']['show']) {
     $params->def('show_mail_to', 1);
     if (checkAccess_REM($realestatemanager_configuration['mail_to']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_input_mail_to', 1);
 }
 }
@@ -1853,7 +1864,7 @@ if ($realestatemanager_configuration['mail_to']['show']) {
 if ($realestatemanager_configuration['add_house']['show']) {
     $params->def('show_add_house', 1);
     if (checkAccess_REM($realestatemanager_configuration['add_house']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_input_add_house', 1);
 }
 }
@@ -1862,7 +1873,7 @@ if ($realestatemanager_configuration['add_house']['show']) {
 if ($realestatemanager_configuration['search_option']['show']) {
     $params->def('search_option', 1);
     if (checkAccess_REM($realestatemanager_configuration['search_option']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('search_option_registrationlevel', 1);
 }
 }
@@ -1924,22 +1935,22 @@ $params->def('typeLayout', 'alone_category');
 
 if (empty($houses)) {
     HTML_realestatemanager::displayHouses_empty($houses, $currentcat, $params,
-     $tabclass, $catid, $cat_all, $pageNav,PHP_realestatemanager::is_exist_subcategory_houses($catid), $option);
+       $tabclass, $catid, $cat_all, $pageNav,PHP_realestatemanager::is_exist_subcategory_houses($catid), $option);
 } else {
   switch ($printItem) {
     case 'pdf':
     HTML_realestatemanager::displayHousesPdf($houses, $currentcat,
-     $params, $tabclass, $catid, $cat_all, $pageNav);
+       $params, $tabclass, $catid, $cat_all, $pageNav);
     break;
 
     case 'print':
     HTML_realestatemanager::displayHousesPrint($houses, $currentcat,
-     $params, $tabclass, $catid, $cat_all, $pageNav);
+       $params, $tabclass, $catid, $cat_all, $pageNav);
     break;
 
     default:
     HTML_realestatemanager::displayHouses($houses, $currentcat, $params,
-       $tabclass, $catid, $cat_all, $pageNav,PHP_realestatemanager::is_exist_subcategory_houses($catid), $option, $layout);
+     $tabclass, $catid, $cat_all, $pageNav,PHP_realestatemanager::is_exist_subcategory_houses($catid), $option, $layout);
     break;
 }
 }
@@ -2085,7 +2096,7 @@ static function showItemREM($option, $id, $catid, $printItem, $layout) {
         // wish list
         if (($realestatemanager_configuration['wishlist']['show'])) {
             if (checkAccess_REM($realestatemanager_configuration['wishlist']['registrationlevel'],
-               'RECURSE', userGID_REM($my->id), $acl)) {
+             'RECURSE', userGID_REM($my->id), $acl)) {
                 $params->def('show_add_to_wishlist', 1);
         }
     }
@@ -2119,7 +2130,7 @@ if ($realestatemanager_configuration['mail_to']['show']) {
 if ($realestatemanager_configuration['calendar']['show']) {
     $params->def('calendar_show', 1);
     if (checkAccess_REM($realestatemanager_configuration['calendarlist']['registrationlevel'],
-     'NORECURSE', userGID_REM($my->id), $acl)) {
+       'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('calendarlist_show', 1);
 }
 }
@@ -2145,7 +2156,7 @@ if ($realestatemanager_configuration['buystatus']['show']) {
 if ($realestatemanager_configuration['reviews']['show']) {
     $params->def('show_reviews', 1);
     if (checkAccess_REM($realestatemanager_configuration['reviews']['registrationlevel'],
-     'NORECURSE', userGID_REM($my->id), $acl)) {
+       'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_inputreviews', 1);
 }
 }
@@ -2153,7 +2164,7 @@ if ($realestatemanager_configuration['reviews']['show']) {
 if ($realestatemanager_configuration['edocs']['show']) {
     $params->def('show_edocstatus', 1);
     if (checkAccess_REM($realestatemanager_configuration['edocs']['registrationlevel'],
-     'NORECURSE', userGID_REM($my->id), $acl)) {
+       'NORECURSE', userGID_REM($my->id), $acl)) {
                 $params->def('show_edocsrequest', 1); //+18.01
                 //+18.01
         }
@@ -2175,7 +2186,7 @@ if ($realestatemanager_configuration['edocs']['show']) {
     if (($realestatemanager_configuration['location_tab']['show'])) {
         $params->def('show_location', 1);
         if (checkAccess_REM($realestatemanager_configuration['location_tab']['registrationlevel'],
-         'NORECURSE', userGID_REM($my->id), $acl)) {
+           'NORECURSE', userGID_REM($my->id), $acl)) {
                 $params->def('show_locationtab_registrationlevel', 1); //+18.01
         }
     }
@@ -2184,7 +2195,7 @@ if ($realestatemanager_configuration['edocs']['show']) {
     if (($realestatemanager_configuration['street_view']['show'])) {
         $params->def('street_view', 1);
         if (checkAccess_REM($realestatemanager_configuration['street_view']['registrationlevel'],
-         'NORECURSE', userGID_REM($my->id), $acl)) {
+           'NORECURSE', userGID_REM($my->id), $acl)) {
                 $params->def('street_view_registrationlevel', 1); //+18.01
         }
     }
@@ -2192,7 +2203,7 @@ if ($realestatemanager_configuration['edocs']['show']) {
     if (($realestatemanager_configuration['reviews_tab']['show'])) {
         $params->def('show_reviews_tab', 1);
         if (checkAccess_REM($realestatemanager_configuration['reviews_tab']['registrationlevel'], 
-           'NORECURSE', userGID_REM($my->id), $acl)) {
+         'NORECURSE', userGID_REM($my->id), $acl)) {
                 $params->def('show_reviewstab_registrationlevel', 1); //+18.01
         }
     }
@@ -2201,7 +2212,7 @@ if ($realestatemanager_configuration['edocs']['show']) {
     if (($realestatemanager_configuration['contacts']['show'])) {
         $params->def('show_contacts_line', 1);
         $i = checkAccess_REM($realestatemanager_configuration['contacts']['registrationlevel'],
-         'NORECURSE', userGID_REM($my->id), $acl);
+           'NORECURSE', userGID_REM($my->id), $acl);
         if ($i) {
                 $params->def('show_contacts_registrationlevel', 1); //+18.01
             }
@@ -2219,7 +2230,7 @@ if ($realestatemanager_configuration['edocs']['show']) {
         if (($realestatemanager_configuration['captcha_option']['show'])) {
             $params->def('captcha_option', 1);
             $i = checkAccess_REM($realestatemanager_configuration['captcha_option']['registrationlevel'],
-               'NORECURSE', userGID_REM($my->id), $acl);
+             'NORECURSE', userGID_REM($my->id), $acl);
             if ($i) {
                 $params->def('captcha_option_registrationlevel', 1); //+18.01
             }
@@ -2228,7 +2239,7 @@ if ($realestatemanager_configuration['edocs']['show']) {
         if (($realestatemanager_configuration['captcha_option_booking']['show'])) {
             $params->def('captcha_option_booking', 1);
             $i = checkAccess_REM($realestatemanager_configuration['captcha_option_booking']['registrationlevel'],
-               'NORECURSE', userGID_REM($my->id), $acl);
+             'NORECURSE', userGID_REM($my->id), $acl);
             if ($i) {
                 $params->def('captcha_option_booking_registrationlevel', 1); //+18.01
             }
@@ -2237,7 +2248,7 @@ if ($realestatemanager_configuration['edocs']['show']) {
         if (($realestatemanager_configuration['captcha_option_sendmessage']['show'])) {
             $params->def('captcha_option_sendmessage', 1);
             $i = checkAccess_REM($realestatemanager_configuration['captcha_option_sendmessage']['registrationlevel'],
-               'NORECURSE', userGID_REM($my->id), $acl);
+             'NORECURSE', userGID_REM($my->id), $acl);
             if ($i) {
                 $params->def('captcha_option_sendmessage_registrationlevel', 1); //+18.01
             }
@@ -2246,7 +2257,7 @@ if ($realestatemanager_configuration['edocs']['show']) {
         if (($realestatemanager_configuration['calendar']['show'])) {
             $params->def('calendar_option', 1);
             $i = checkAccess_REM($realestatemanager_configuration['calendarlist']['registrationlevel'],
-               'NORECURSE', userGID_REM($my->id), $acl);
+             'NORECURSE', userGID_REM($my->id), $acl);
             if ($i) {
                 $params->def('calendar_option_registrationlevel', 1); //+18.01
             }
@@ -2285,13 +2296,13 @@ if ($realestatemanager_configuration['edocs']['show']) {
         foreach ($currencys as $oneCurency) {
             $oneCurrArr = explode('=', $oneCurency);
             if(!empty($oneCurrArr[0]) && !empty($oneCurrArr[1])){
-             $currencyArr[$oneCurrArr[0]] = $oneCurrArr[1]; 
-             if($house->priceunit == $oneCurrArr[0]){
-                 $currentCurrency = $oneCurrArr[1];
-             }
-         }
-     }
-     if($currentCurrency){
+               $currencyArr[$oneCurrArr[0]] = $oneCurrArr[1]; 
+               if($house->priceunit == $oneCurrArr[0]){
+                   $currentCurrency = $oneCurrArr[1];
+               }
+           }
+       }
+       if($currentCurrency){
         foreach ($currencyArr as $key=>$value) {
             $currencys_price[$key] = round($value / $currentCurrency * $house->price, 2);
 
@@ -2328,16 +2339,16 @@ if ($realestatemanager_configuration['edocs']['show']) {
 
                 switch ($printItem) {
                     case 'pdf': HTML_realestatemanager::displayHouseMainPdf($house, $tabclass,
-                       $params, $currentcat, $ratinglist, $house_photos);
+                     $params, $currentcat, $ratinglist, $house_photos);
                     break;
 
                     case 'print': HTML_realestatemanager::displayHouseMainprint($house,
-                       $tabclass, $params, $currentcat, $ratinglist, $house_photos);
+                     $tabclass, $params, $currentcat, $ratinglist, $house_photos);
                     break;
 
                     default: HTML_realestatemanager::displayHouse($house, $tabclass,
-                       $params, $currentcat, $ratinglist, $house_photos,$videos,$tracks, $id, $catid,
-                       $option, $house_feature, $currencys_price, $layout);
+                     $params, $currentcat, $ratinglist, $house_photos,$videos,$tracks, $id, $catid,
+                     $option, $house_feature, $currencys_price, $layout);
                     break;
                 }
             }
@@ -2427,7 +2438,7 @@ if ($realestatemanager_configuration['edocs']['show']) {
                 $listing_type[] = mosHtml::makeOption(1, _REALESTATE_MANAGER_OPTION_FOR_RENT);
                 $listing_type[] = mosHtml::makeOption(2, _REALESTATE_MANAGER_OPTION_FOR_SALE);
                 $listing_type_list = mosHTML :: selectList($listing_type, 'listing_type',
-                   'class="inputbox" size="1" style="width: 115px"', 'value', 'text', $hlisting);
+                 'class="inputbox" size="1" style="width: 115px"', 'value', 'text', $hlisting);
                 $params->def('listing_type_list', $listing_type_list);
 
         //listing status
@@ -2453,7 +2464,7 @@ if ($realestatemanager_configuration['edocs']['show']) {
                     $i++;
                 }
                 $property_type_list = mosHTML :: selectList($property_type, 'property_type', 'class="inputbox"
-                 size="1" style="width: 115px"', 'value', 'text', $hproperty);
+                   size="1" style="width: 115px"', 'value', 'text', $hproperty);
                 $params->def('property_type_list', $property_type_list);
 
         //categories        
@@ -2886,7 +2897,7 @@ if ($realestatemanager_configuration['edocs']['show']) {
     }        
 
     if (isset($_REQUEST['search_date_from']) && (trim($_REQUEST['search_date_from']) ) &&
-     trim($_REQUEST['search_date_until']) == "") {
+       trim($_REQUEST['search_date_until']) == "") {
         $RentSQL = "((fk_rentid = 0 OR b.id NOT IN (select dd.fk_houseid " .
     " from #__rem_rent AS dd where dd.rent_until >".$sign." ' " . $search_date_from .
     "' and dd.rent_from <= '" . $search_date_from . 
@@ -2903,7 +2914,7 @@ if ($realestatemanager_configuration['edocs']['show']) {
 
 
 if (isset($_REQUEST['search_date_until']) && (trim($_REQUEST['search_date_until']) )
-   && trim($_REQUEST['search_date_from']) == "") {
+ && trim($_REQUEST['search_date_from']) == "") {
     $RentSQL = "((fk_rentid = 0 OR b.id NOT IN (select dd.fk_houseid "
 . "from #__rem_rent AS dd where dd.rent_from <".$sign." '" . $search_date_until . "' and dd.rent_until >= '"
 . $search_date_until . "' and dd.fk_houseid=b.id and dd.rent_return is null)) AND (listing_type = \"1\"))";
@@ -3018,21 +3029,21 @@ if (isset($_REQUEST['search_date_until']) && (trim($_REQUEST['search_date_until'
                     if ($realestatemanager_configuration['rentstatus']['show']) {
                         $params->def('show_rentstatus', 1);
                         if (checkAccess_REM($realestatemanager_configuration['rentrequest']['registrationlevel'],
-                           'NORECURSE', userGID_REM($my->id), $acl)) {
+                         'NORECURSE', userGID_REM($my->id), $acl)) {
                             $params->def('show_rentrequest', 1);
                     }
                 }
                 if ($realestatemanager_configuration['housestatus']['show']) {
                     $params->def('show_housestatus', 1);
                     if (checkAccess_REM($realestatemanager_configuration['houserequest']['registrationlevel'],
-                       'NORECURSE', userGID_REM($my->id), $acl)) {
+                     'NORECURSE', userGID_REM($my->id), $acl)) {
                         $params->def('show_houserequest', 1);
                 }
             }
             if ($realestatemanager_configuration['buystatus']['show']) {
                 $params->def('show_buystatus', 1);
                 if (checkAccess_REM($realestatemanager_configuration['buyrequest']['registrationlevel'],
-                   'NORECURSE', userGID_REM($my->id), $acl)) {
+                 'NORECURSE', userGID_REM($my->id), $acl)) {
                     $params->def('show_buyrequest', 1);
             }
         }
@@ -3041,7 +3052,7 @@ if (isset($_REQUEST['search_date_until']) && (trim($_REQUEST['search_date_until'
         if ($realestatemanager_configuration['add_house']['show']) {
             $params->def('show_add_house', 1);
             if (checkAccess_REM($realestatemanager_configuration['add_house']['registrationlevel'],
-               'NORECURSE', userGID_REM($my->id), $acl)) {
+             'NORECURSE', userGID_REM($my->id), $acl)) {
                 $params->def('show_input_add_house', 1);
         }
     }
@@ -3050,7 +3061,7 @@ if (isset($_REQUEST['search_date_until']) && (trim($_REQUEST['search_date_until'
     if ($realestatemanager_configuration['price']['show']) {
         $params->def('show_pricestatus', 1);
         if (checkAccess_REM($realestatemanager_configuration['price']['registrationlevel'],
-           'NORECURSE', userGID_REM($my->id), $acl)) {
+         'NORECURSE', userGID_REM($my->id), $acl)) {
             $params->def('show_pricerequest', 1);
     }
 }
@@ -3087,21 +3098,21 @@ $tabclass = array('sectiontableentry1', 'sectiontableentry2');
 if ($realestatemanager_configuration['mail_to']['show']) {
     $params->def('show_mail_to', 1);
     if (checkAccess_REM($realestatemanager_configuration['mail_to']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_input_mail_to', 1);
 }
 }
 if ($realestatemanager_configuration['add_house']['show']) {
     $params->def('show_add_house', 1);
     if (checkAccess_REM($realestatemanager_configuration['add_house']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_input_add_house', 1);
 }
 }
 if ($realestatemanager_configuration['search_option']['show']) {
     $params->def('search_option', 1);
     if (checkAccess_REM($realestatemanager_configuration['search_option']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('search_option_registrationlevel', 1);
 }
 }
@@ -3109,21 +3120,21 @@ if ($realestatemanager_configuration['search_option']['show']) {
         // wish list
 if (($realestatemanager_configuration['wishlist']['show'])) {
     if (checkAccess_REM($realestatemanager_configuration['wishlist']['registrationlevel'],
-       'RECURSE', userGID_REM($my->id), $acl)) {
+     'RECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_add_to_wishlist', 1);
 }
 }        
         // show map for layout search_result list
 if (($realestatemanager_configuration['searchlayout_map']['show'])) {
     if (checkAccess_REM($realestatemanager_configuration['searchlayout_map']['registrationlevel'],
-       'RECURSE', userGID_REM($my->id), $acl)) {
+     'RECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_searchlayout_map', 1);
 }
 }
         // show order by form for layout search_result list
 if (($realestatemanager_configuration['searchlayout_orderby']['show'])) {
     if (checkAccess_REM($realestatemanager_configuration['searchlayout_orderby']['registrationlevel'],
-       'RECURSE', userGID_REM($my->id), $acl)) {
+     'RECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_searchlayout_orderby', 1);
 }
 }        
@@ -3131,7 +3142,7 @@ if (($realestatemanager_configuration['searchlayout_orderby']['show'])) {
         // show search form 
 if (($realestatemanager_configuration['searchlayout_form']['show'])) {
     if (checkAccess_REM($realestatemanager_configuration['searchlayout_form']['registrationlevel'],
-       'RECURSE', userGID_REM($my->id), $acl)) {
+     'RECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_searchlayout_form', 1);
 }
 }
@@ -3160,7 +3171,7 @@ if (isset($_REQUEST['typeLayout'])){
 if (count($houses)) {
     if (  $task == 'my_houses' || $task == 'show_my_houses' || $task == 'showmyhouses'  ) PHP_realestatemanager::showTabs();
         if ($task == 'search') {
-         if( !isset($_REQUEST['searchLayout']) ) {
+           if( !isset($_REQUEST['searchLayout']) ) {
 
             $layout = $params->get('searchresultlayout');
             $layoutsearch = $params->get('showsearchhouselayout');
@@ -3185,7 +3196,7 @@ if (count($houses)) {
     PHP_realestatemanager::showSearchHouses($option, $catid, $option, $layoutsearch);
 
 print_r("<h1 style='text-align:center'>" . _REALESTATE_MANAGER_LABEL_SEARCH_NOTHING_FOUND .
- " </h1><br><br><div class='row-fluid'><div class='span9'></div></div>");
+   " </h1><br><br><div class='row-fluid'><div class='span9'></div></div>");
 positions_rem($params->get('notfound02'));
 
             // "<div class='span3'><div class='rem_house_contacts'>
@@ -3212,7 +3223,7 @@ positions_rem($params->get('notfound02'));
 
         $numeric_houseids = Array();
         if (empty($house->houseid) &&
-           $realestatemanager_configuration['houseid']['auto-increment']['boolean'] == 1) {
+         $realestatemanager_configuration['houseid']['auto-increment']['boolean'] == 1) {
             $database->setQuery("select houseid from #__rem_houses order by houseid");
         $houseids = $database->loadObjectList();
 
@@ -3250,11 +3261,11 @@ positions_rem($params->get('notfound02'));
     }
 
     $pathway = sefRelToAbs('index.php?option=' . $option .
-       '&amp;task=show_add&amp;Itemid=' . $Itemid);
+     '&amp;task=show_add&amp;Itemid=' . $Itemid);
     $pathway_name = _REALESTATE_MANAGER_LABEL_TITLE_ADD_HOUSE;
 } else {
     $pathway = sefRelToAbs('index.php?option=' . $option .
-       '&amp;task=edit_house&amp;Itemid=' . $Itemid . '&amp;id=' . $bid);
+     '&amp;task=edit_house&amp;Itemid=' . $Itemid . '&amp;id=' . $bid);
     $pathway_name = _REALESTATE_MANAGER_LABEL_TITLE_EDIT_HOUSE;
 }
 
@@ -3269,14 +3280,14 @@ $categories = array();
 com_house_categoryTreeList(0, '', true, $categories);
 if (count($categories) <= 1)
     mosRedirect("index.php?option=$option&section=categories",
-       _REALESTATE_MANAGER_ADMIN_IMPEXP_ADD);
+     _REALESTATE_MANAGER_ADMIN_IMPEXP_ADD);
 if (trim($house->id) != "")
     $house->setCatIds();
 $maxsize = 5;
 if (count($categories) > 6)
     $maxsize = 6;
 $clist = mosHTML :: selectList($categories, 'catid[]', 'class="inputbox"
-   multiple', 'value', 'text', ($house->catid));
+ multiple', 'value', 'text', ($house->catid));
 
         //get Rating
 $retVal2 = mosRealEstateManagerOthers :: getRatingArray();
@@ -3291,7 +3302,7 @@ $help = str_replace($mosConfig_live_site, "", $house->edok_link);
 $delete_ehouse_yesno[] = mosHTML :: makeOption($help, _REALESTATE_MANAGER_YES);
 $delete_ehouse_yesno[] = mosHTML :: makeOption('0', _REALESTATE_MANAGER_NO);
 $delete_edoc = mosHTML :: RadioList($delete_ehouse_yesno, 'delete_edoc',
-   'class="inputbox"', '0', 'value', 'text');
+ 'class="inputbox"', '0', 'value', 'text');
 
         // fail if checked out not by 'me'
 if ($house->checked_out && $house->checked_out <> $my->id)
@@ -3310,7 +3321,7 @@ $listing_type[] = mosHtml::makeOption(0, _REALESTATE_MANAGER_OPTION_SELECT);
 $listing_type[] = mosHtml::makeOption(1, _REALESTATE_MANAGER_OPTION_FOR_RENT);
 $listing_type[] = mosHtml::makeOption(2, _REALESTATE_MANAGER_OPTION_FOR_SALE);
 $listing_type_list = mosHTML :: selectList($listing_type, 'listing_type',
-   'class="inputbox" size="1"', 'value', 'text', $house->listing_type);
+ 'class="inputbox" size="1"', 'value', 'text', $house->listing_type);
 
         //Select list for listing status
 $listing_status[] = mosHtml::makeOption(0, _REALESTATE_MANAGER_OPTION_SELECT);
@@ -3321,7 +3332,7 @@ foreach ($listing_status1 as $listing_status2) {
     $i++;
 }
 $listing_status_list = mosHTML :: selectList($listing_status, 'listing_status',
-   'class="inputbox" size="1"', 'value', 'text', $house->listing_status);
+ 'class="inputbox" size="1"', 'value', 'text', $house->listing_status);
 
         //Select list for property type
 $property_type[] = mosHtml::makeOption(0, _REALESTATE_MANAGER_OPTION_SELECT);
@@ -3332,7 +3343,7 @@ foreach ($property_type1 as $property_type2) {
     $i++;
 }
 $property_type_list = mosHTML :: selectList($property_type, 'property_type',
-   'class="inputbox" size="1"', 'value', 'text', $house->property_type);
+ 'class="inputbox" size="1"', 'value', 'text', $house->property_type);
 
 if (trim($house->id) != "") {
     $query = "select * from #__rem_rent_sal WHERE fk_houseid='$house->id' order by `yearW`, `monthW`";
@@ -3416,9 +3427,9 @@ for ($i = 0;$i < count($videos);$i++) {
         }
     }
     $currency = mosHTML :: selectList($temp_currency, 'priceunit', 'class="inputbox" size="1"',
-       'value', 'text', $house->priceunit);
+     'value', 'text', $house->priceunit);
     $currency_spacial_price = mosHTML :: selectList($temp_currency, 'currency_spacial_price',
-       'class="inputbox" size="1"', 'value', 'text', $house->priceunit);
+     'class="inputbox" size="1"', 'value', 'text', $house->priceunit);
     $query = "SELECT lang_code, title FROM #__languages";
     $database->setQuery($query);
     $languages = $database->loadObjectList();
@@ -3428,7 +3439,7 @@ for ($i = 0;$i < count($videos);$i++) {
         $languages_row[] = mosHTML::makeOption($language->lang_code, $language->title);
     }
     $languages = mosHTML :: selectList($languages_row, 'language',
-       'class="inputbox" size="1"', 'value', 'text', $house->language);
+     'class="inputbox" size="1"', 'value', 'text', $house->language);
 
     for ($i = 6; $i <= 10; $i++) {
         $name = "_REALESTATE_MANAGER_EXTRA" . $i . "_SELECTLIST";
@@ -3457,16 +3468,16 @@ for ($i = 0;$i < count($videos);$i++) {
             break;
         }
         $extra_list[] = mosHTML :: selectList($extraOption, 'extra' . $i,
-           'class="inputbox" size="1"', 'value', 'text', $extraSelect);
+         'class="inputbox" size="1"', 'value', 'text', $extraSelect);
     }
 
         // if ($my->id == $houseTMP->id)
         //     PHP_realestatemanager::showTabs();
 
     HTML_realestatemanager :: editHouse($option, $house, $clist, $ratinglist,
-       $delete_edoc,$videos,$youtube, $tracks,  $listing_status_list, $property_type_list, $listing_type_list,
-       $house_photo, $house_temp_photos, $house_photos, $house_rent_sal, $house_feature, $currency,
-       $languages, $extra_list, $currency_spacial_price, $associateArray);
+     $delete_edoc,$videos,$youtube, $tracks,  $listing_status_list, $property_type_list, $listing_type_list,
+     $house_photo, $house_temp_photos, $house_photos, $house_rent_sal, $house_feature, $currency,
+     $languages, $extra_list, $currency_spacial_price, $associateArray);
 }
 
 
@@ -3496,9 +3507,7 @@ static function ajax_update_check_payment(){
     $query = "UPDATE `val_rem_orders_details` SET `status` = 'En attente du chèque' WHERE `val_rem_orders`.`fk_order_id` =" . $order_id;
     $database->setQuery($query);
     $database->query();   
-    
-    JHTML::_('behavior.modal');
-    echo'<a href="#leftcolumn" class="modal">Nous validerons votre réservation lors de la récéption de votre chèque.</a>';
+    exit;
 }
 
 static function saveHouse($option, $id) {
@@ -3622,15 +3631,15 @@ if (!$house->check()) {
         //************approve on add begin
 if ($realestatemanager_configuration['approve_on_add']['show']) {
     if (checkAccess_REM($realestatemanager_configuration['approve_on_add']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
-       $house->approved = 1;
+     'NORECURSE', userGID_REM($my->id), $acl)) {
+     $house->approved = 1;
 }
 } 
         //************approve on add begin
 if ($realestatemanager_configuration['publish_on_add']['show']) {
     if (checkAccess_REM($realestatemanager_configuration['publish_on_add']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
-       $house->published = 1;
+     'NORECURSE', userGID_REM($my->id), $acl)) {
+     $house->published = 1;
 }
 }         
 
@@ -3669,7 +3678,7 @@ if ($_FILES['image_link']['name'] != '') {
     $file['type'] = $_FILES['image_link']['type'];
     $db = JFactory::getDbo();
     $db->setQuery("SELECT mime_type FROM #__rem_mime_types WHERE `mime_ext` = " .
-       $db->quote($ext) . " and mime_type = " . $db->quote($file['type']));
+     $db->quote($ext) . " and mime_type = " . $db->quote($file['type']));
     $file_db_mime = $db->loadResult();
     if ($file_db_mime != $file['type']) {
         echo "<script> alert(' " . _REALESTATE_MANAGER_FILE_MIME_TYPE_NOT_MATCH . ". - " .
@@ -3680,8 +3689,8 @@ if ($_FILES['image_link']['name'] != '') {
     $uploadfile = $uploaddir . $code . "_" . $_FILES['image_link']['name'];
     $file_name = $code . "_" . $_FILES['image_link']['name'];
     if (copy($_FILES['image_link']['tmp_name'], $uploadfile)) {
-     $database->setQuery("UPDATE #__rem_houses SET image_link='$file_name' WHERE id=" . $house->id);
-     if (!$database->query())
+       $database->setQuery("UPDATE #__rem_houses SET image_link='$file_name' WHERE id=" . $house->id);
+       if (!$database->query())
         echo "<script> alert('" . $database->getErrorMsg() . "');</script>\n";
 }
         } //end if
@@ -3732,7 +3741,7 @@ if ($_FILES['image_link']['name'] != '') {
                     $file['type'] = $_FILES['new_photo_file']['type'][$i];
                     $db = JFactory::getDbo();
                     $db->setQuery("SELECT mime_type FROM #__rem_mime_types WHERE `mime_ext` = " .
-                       $db->quote($ext) . " and mime_type = " . $db->quote($file['type']));
+                     $db->quote($ext) . " and mime_type = " . $db->quote($file['type']));
                     $file_db_mime = $db->loadResult();
                     if ($file_db_mime != $file['type']) {
                         echo "<script> alert(' " . _REALESTATE_MANAGER_FILE_MIME_TYPE_NOT_MATCH . " - " .
@@ -3778,7 +3787,7 @@ if ($_FILES['image_link']['name'] != '') {
                 $house->image_link = '';
 
                 unlink($mosConfig_absolute_path . '/components/com_realestatemanager/photos/'
-                   . $image_link[0]->image_link);
+                 . $image_link[0]->image_link);
 
                 //separation of the file name in the name and extension
                 $del_main_phot = pathinfo($image_link[0]->image_link);
@@ -3872,7 +3881,7 @@ if ($_FILES['image_link']['name'] != '') {
             $realestatemanager_configuration['add_email']['address'] != "") {
             $params->def('show_email', 1);
         if (checkAccess_REM($realestatemanager_configuration['add_email']['registrationlevel'],
-           'NORECURSE', userGID_REM($my->id), $acl)) {
+         'NORECURSE', userGID_REM($my->id), $acl)) {
             $params->def('show_input_email', 1);
     }
 }
@@ -3907,7 +3916,7 @@ if ($params->get('show_input_email')) {
     $message = str_replace("{category}", $item_house[0]->category, $message);
 
     mosMail($mosConfig_mailfrom, _REALESTATE_MANAGER_LABEL_ANONYMOUS, $mail_to, _REALESTATE_MANAGER_NEW_HOUSE_ADDED,
-       $message, true);
+     $message, true);
 
             //}
 }
@@ -3967,14 +3976,14 @@ function checkAccess_REM($accessgroupid, $recurse, $usersgroupid, $acl) {
 
 
         if ($option == "com_comprofiler") {
-         return;
-     }
+           return;
+       }
 
-     $userid = $my->id;
-     $query = "SELECT u.id, u.name AS username FROM #__users AS u WHERE u.id = " . $userid;
-     $database->setQuery($query);
-     $ownerslist = $database->loadObjectList();
-     foreach ($ownerslist as $owner) {
+       $userid = $my->id;
+       $query = "SELECT u.id, u.name AS username FROM #__users AS u WHERE u.id = " . $userid;
+       $database->setQuery($query);
+       $ownerslist = $database->loadObjectList();
+       foreach ($ownerslist as $owner) {
         $username = $owner->username;
     }
 
@@ -4012,7 +4021,7 @@ function checkAccess_REM($accessgroupid, $recurse, $usersgroupid, $acl) {
     if ($realestatemanager_configuration['cb_edit']['show']) {
         $params->def('show_edit', 1);
         $i = checkAccess_REM($realestatemanager_configuration['cb_edit']['registrationlevel'],
-           'NORECURSE', userGID_REM($my->id), $acl);
+         'NORECURSE', userGID_REM($my->id), $acl);
         if ($i)
             $params->def('show_edit_registrationlevel', 1);
     }
@@ -4021,7 +4030,7 @@ function checkAccess_REM($accessgroupid, $recurse, $usersgroupid, $acl) {
         if (($realestatemanager_configuration['cb_rent']['show'])) {
             $params->def('show_rent', 1);
             $i = checkAccess_REM($realestatemanager_configuration['cb_rent']['registrationlevel'],
-               'NORECURSE', userGID_REM($my->id), $acl);
+             'NORECURSE', userGID_REM($my->id), $acl);
             if ($i)
                 $params->def('show_rent_registrationlevel', 1);
         }
@@ -4031,7 +4040,7 @@ function checkAccess_REM($accessgroupid, $recurse, $usersgroupid, $acl) {
         if (($realestatemanager_configuration['cb_buy']['show'])) {
             $params->def('show_buy', 1);
             $i = checkAccess_REM($realestatemanager_configuration['cb_buy']['registrationlevel'],
-               'NORECURSE', userGID_REM($my->id), $acl);
+             'NORECURSE', userGID_REM($my->id), $acl);
             if ($i)
                 $params->def('show_buy_registrationlevel', 1);
         }
@@ -4041,7 +4050,7 @@ function checkAccess_REM($accessgroupid, $recurse, $usersgroupid, $acl) {
         if (($realestatemanager_configuration['cb_history']['show'])) {
             $params->def('show_history', 1);
             $i = checkAccess_REM($realestatemanager_configuration['cb_history']['registrationlevel'],
-               'NORECURSE', userGID_REM($my->id), $acl);
+             'NORECURSE', userGID_REM($my->id), $acl);
             if ($i)
                 $params->def('show_history_registrationlevel', 1);
         }
@@ -4163,7 +4172,7 @@ static function editMyHouses($option) {
         //get real user houses id
         if (count($bid)) {
             $database->setQuery("SELECT id FROM #__rem_houses WHERE owner_id='" . $my->id
-               . "' AND id IN (" . implode(', ', $bid) . ")");
+             . "' AND id IN (" . implode(', ', $bid) . ")");
             if (version_compare(JVERSION, "3.0.0", "lt"))
                 $bid = $database->loadResultArray();
             else
@@ -4205,11 +4214,11 @@ static function editMyHouses($option) {
                 $image_link_name = substr($image_link[$i]->image_link, 0, strrpos($image_link[$i]->image_link, "."));
                 $image_link_type = substr($image_link[$i]->image_link, strrpos($image_link[$i]->image_link, "."));
                 @unlink($mosConfig_absolute_path . "/components/com_realestatemanager/photos/"
-                   . $image_link_name . "_gallery" . $image_link_type);
+                 . $image_link_name . "_gallery" . $image_link_type);
                 @unlink($mosConfig_absolute_path . "/components/com_realestatemanager/photos/"
-                   . $image_link_name . "_mini" . $image_link_type);
+                 . $image_link_name . "_mini" . $image_link_type);
                 @unlink($mosConfig_absolute_path . "/components/com_realestatemanager/photos/"
-                   . $image_link[$i]->image_link);
+                 . $image_link[$i]->image_link);
             }
 
             $database->setQuery("SELECT thumbnail_img, main_img FROM #__rem_photos WHERE fk_houseid IN (" . $bids . ")");
@@ -4217,9 +4226,9 @@ static function editMyHouses($option) {
 
             for ($i = 0; $i <= count($del_photos); $i++) {
                 @unlink($mosConfig_absolute_path . "/components/com_realestatemanager/photos/"
-                   . $del_photos[$i]->thumbnail_img);
+                 . $del_photos[$i]->thumbnail_img);
                 @unlink($mosConfig_absolute_path . "/components/com_realestatemanager/photos/"
-                   . $del_photos[$i]->main_img);
+                 . $del_photos[$i]->main_img);
             }
             $database->setQuery("DELETE FROM #__rem_photos WHERE fk_houseid IN (" . $bids . ")");
             $database->query();
@@ -4235,7 +4244,7 @@ static function editMyHouses($option) {
     }
     if ($option == 'com_comprofiler') {
         $redirect = JRoute::_("index.php?option=" . $option .
-         "&task=show_add&is_show_data=1&task=edit_my_houses&Itemid=" . $Itemid);
+           "&task=show_add&is_show_data=1&task=edit_my_houses&Itemid=" . $Itemid);
     } else {
         $redirect = JRoute::_("index.php?option=" . $option . "&task=edit_my_houses&Itemid=" . $Itemid);
     }
@@ -4256,7 +4265,7 @@ static function publishHouse() {
         if(($count_house_single_user + count($bid))<= $count_house_for_single_group){
 
             $database->setQuery("SELECT id FROM #__rem_houses WHERE owner_id='" . $my->id .
-             "' AND id IN (" . implode(', ', $bid) . ")");
+               "' AND id IN (" . implode(', ', $bid) . ")");
 
             if (version_compare(JVERSION, '3.0', 'lt')){
                 $bid = $database->loadResultArray();
@@ -4294,7 +4303,7 @@ static function publishHouse() {
         //get real user houses id
         if (count($bid)) {
             $database->setQuery("SELECT id FROM #__rem_houses WHERE owner_id='"
-               . $my->id . "' AND id IN (" . implode(', ', $bid) . ")");
+             . $my->id . "' AND id IN (" . implode(', ', $bid) . ")");
             if (version_compare(JVERSION, "3.0.0", "lt"))
                 $bid = $database->loadResultArray();
             else
@@ -4308,10 +4317,10 @@ static function publishHouse() {
         }
         if ($option == 'com_comprofiler') {
             $redirect = JRoute::_("index.php?option=" . $option .
-               "&task=show_add&is_show_data=1&task=edit_my_houses&Itemid=" . $Itemid);
+             "&task=show_add&is_show_data=1&task=edit_my_houses&Itemid=" . $Itemid);
         } else {
             $redirect = JRoute::_("index.php?option=" . $option .
-               "&task=edit_my_houses&Itemid=" . $Itemid);
+             "&task=edit_my_houses&Itemid=" . $Itemid);
         }
         mosRedirect($redirect);
     }
@@ -4367,7 +4376,7 @@ static function publishHouse() {
         if (($realestatemanager_configuration['contacts']['show'])) {
             $params->def('show_contacts_line', 1);
             $i = checkAccess_REM($realestatemanager_configuration['contacts']['registrationlevel'],
-               'NORECURSE', userGID_REM($my->id), $acl);
+             'NORECURSE', userGID_REM($my->id), $acl);
             if ($i)
                 $params->def('show_contacts_registrationlevel', 1);
         }
@@ -4398,7 +4407,7 @@ static function publishHouse() {
         $params->def('header', _REALESTATE_MANAGER_LABEL_TITLE_OWNERSLIST);
 
         if (checkAccess_REM($realestatemanager_configuration['ownerslist']['registrationlevel'],
-           'NORECURSE', userGID_REM($my->id), $acl) &&
+         'NORECURSE', userGID_REM($my->id), $acl) &&
             $realestatemanager_configuration['ownerslist']['show']) {
             $params->def('ownerslist_show', 1);
     }
@@ -4529,13 +4538,13 @@ static function publishHouse() {
         }
 
         $params->def('header', ((trim($menu_name)) ? $menu_name . ":" : "") .
-           _REALESTATE_MANAGER_LABEL_TITLE_USER_HOUSES);
+         _REALESTATE_MANAGER_LABEL_TITLE_USER_HOUSES);
         $pathway = sefRelToAbs('index.php?option=' . $option . '&amp;task=owners_list&amp;Itemid=' . $Itemid);
 
         $pathway_name = $user;
 
         $pathway = sefRelToAbs('index.php?option=' . $option . '&amp;task=view_user_houses&amp;Itemid='
-           . $Itemid . '&amp;name=' . $user);
+         . $Itemid . '&amp;name=' . $user);
         // for 1.6
         $path_way = $mainframe->getPathway();
         $path_way->addItem($pathway_name, $pathway);
@@ -4569,7 +4578,7 @@ static function publishHouse() {
 
         foreach ($item_house as $item) {
           $message .= str_replace("{username}", $item->user_name,
-             _REALESTATE_MANAGER_EMAIL_NOTIFICATION_RENT_BEFORE_END);
+           _REALESTATE_MANAGER_EMAIL_NOTIFICATION_RENT_BEFORE_END);
           $message = str_replace("{user_email}", $item->user_email, $message);
           $message = str_replace("{house_title}", $item->htitle, $message);
           $message = str_replace("{ID}", $item->id, $message);
@@ -4644,7 +4653,7 @@ static function rent_requests($option, $bid) {
                 }
             }
             $datas[] = array('email' => $rent_request->user_email,
-               'name' => $rent_request->user_name, 'id' => $rent_request->fk_houseid);
+             'name' => $rent_request->user_name, 'id' => $rent_request->fk_houseid);
         }
 
         if ($realestatemanager_configuration['rent_answer']) {
@@ -4655,10 +4664,10 @@ static function rent_requests($option, $bid) {
 
         if ($option == "com_comprofiler") {
             mosRedirect("index.php?option=" . $option .
-               "&task=rent_requests&is_show_data=1&Itemid=" . $Itemid);
+             "&task=rent_requests&is_show_data=1&Itemid=" . $Itemid);
         } else {
             mosRedirect("index.php?option=" . $option .
-               "&task=rent_requests&Itemid=" . $Itemid);
+             "&task=rent_requests&Itemid=" . $Itemid);
         }
     }
 
@@ -4680,7 +4689,7 @@ static function rent_requests($option, $bid) {
                 }
             }
             $datas[] = array('email' => $rent_request->user_email,
-               'name' => $rent_request->user_name, 'id' => $rent_request->fk_houseid);
+             'name' => $rent_request->user_name, 'id' => $rent_request->fk_houseid);
         }
 
         if ($realestatemanager_configuration['rent_answer']) {
@@ -4691,7 +4700,7 @@ static function rent_requests($option, $bid) {
 
         if ($option == "com_comprofiler") {
             mosRedirect("index.php?option=" . $option .
-               "&task=rent_requests&is_show_data=1&Itemid=" . $Itemid);
+             "&task=rent_requests&is_show_data=1&Itemid=" . $Itemid);
         } else {
             mosRedirect("index.php?option=" . $option . "&task=rent_requests&Itemid=" . $Itemid);
         }
@@ -4764,7 +4773,7 @@ static function rent_requests($option, $bid) {
             }
 
             mosMail($mosConfig_mailfrom, $conf->_registry['config']['data']->fromname, $data['email'],
-               _REALESTATE_MANAGER_EMAIL_RENT_ANSWER_SUBJECT, $message, true);
+             _REALESTATE_MANAGER_EMAIL_RENT_ANSWER_SUBJECT, $message, true);
         }
     }
 
@@ -4834,10 +4843,10 @@ static function rent_requests($option, $bid) {
     }
     if ($option == "com_comprofiler") {
         mosRedirect(JRoute::_("index.php?option=" . $option .
-           "&task=buying_requests&is_show_data=1&Itemid=" . $Itemid));
+         "&task=buying_requests&is_show_data=1&Itemid=" . $Itemid));
     } else {
         mosRedirect(JRoute::_("index.php?option=" . $option .
-           "&task=buying_requests&Itemid=" . $Itemid));
+         "&task=buying_requests&Itemid=" . $Itemid));
     }
 }
 
@@ -4865,7 +4874,7 @@ static function decline_buying_requests($option, $bids) {
     }
     if ($option == "com_comprofiler") {
         mosRedirect("index.php?option=" . $option .
-           "&task=buying_requests&is_show_data=1&Itemid=" . $Itemid);
+         "&task=buying_requests&is_show_data=1&Itemid=" . $Itemid);
     } else {
         mosRedirect("index.php?option=" . $option . "&task=buying_requests&Itemid=" . $Itemid);
     }
@@ -5009,7 +5018,7 @@ for($i = 0, $n = count($ids); $i < $n; $i++){
 $oneTerm->rent_from = substr($oneTerm->rent_from, 0, 10);
 $oneTerm->rent_until = substr($oneTerm->rent_until, 0, 10);
 $returnMessage = checkRentDayNightREM (($oneTerm->rent_from),($oneTerm->rent_until),
-   $rent_from, $rent_until, $realestatemanager_configuration);
+ $rent_from, $rent_until, $realestatemanager_configuration);
 if(strlen($returnMessage) > 0){
     echo "<script> alert('$returnMessage'); window.history.go(-1); </script>\n";          
     exit;
@@ -5057,9 +5066,9 @@ $house->checkin();
 
 if ($option == 'com_comprofiler')
     $link_for_mosRedirect = JRoute::_("index.php?option=" . $option .
-       "&task=edit_my_houses&Itemid=" . $Itemid); else
+     "&task=edit_my_houses&Itemid=" . $Itemid); else
 $link_for_mosRedirect = JRoute::_("index.php?option=" . $option .
-   "&task=edit_my_houses&Itemid=" . $Itemid);
+ "&task=edit_my_houses&Itemid=" . $Itemid);
 mosRedirect($link_for_mosRedirect);
 }
 
@@ -5191,7 +5200,7 @@ $userlist = array_merge($userlist, $database->loadObjectList());
 $usermenu = mosHTML :: selectList($userlist, 'userid', 'class="inputbox" size="1"', 'value', 'text', '-1');
 
 HTML_realestatemanager :: editRentHouses($option, $house1, $houses_rents_assoc,
-   $title_assoc, $usermenu, $all_assosiate_rent, "edit_rent");
+ $title_assoc, $usermenu, $all_assosiate_rent, "edit_rent");
 }
 
 
@@ -5319,7 +5328,7 @@ $database->setQuery("SELECT id AS value, name AS text from #__users ORDER BY nam
 $userlist = array_merge($userlist, $database->loadObjectList());
 $usermenu = mosHTML :: selectList($userlist, 'userid', 'class="inputbox" size="1"', 'value', 'text', '-1');
 HTML_realestatemanager :: editRentHouses($option, $house1, $houses_rents_assoc,
-   $title_assoc, $usermenu, $all_assosiate_rent, "rent_return");
+ $title_assoc, $usermenu, $all_assosiate_rent, "rent_return");
 }
 
 static function saveRent_return($option, $lids) {
@@ -5376,10 +5385,10 @@ static function saveRent_return($option, $lids) {
 
 if ($option == 'com_comprofiler') {
     $link_for_mosRedirect = JRoute::_("index.php?option=" . $option .
-       "&task=edit_my_houses&Itemid=" . $Itemid);
+     "&task=edit_my_houses&Itemid=" . $Itemid);
 } else {
     $link_for_mosRedirect = JRoute::_("index.php?option=" . $option .
-       "&task=edit_my_houses&Itemid=" . $Itemid);
+     "&task=edit_my_houses&Itemid=" . $Itemid);
 }
 mosRedirect($link_for_mosRedirect);
 }
@@ -5391,7 +5400,7 @@ static function rent_history($option) {
 
     if ($my->email == null) {
         mosRedirect("index.php?option=com_realestatemanager&Itemid=" .
-           $Itemid, _REALESTATE_MANAGER_PLEASE_LOGIN);
+         $Itemid, _REALESTATE_MANAGER_PLEASE_LOGIN);
         exit;
     }
 
@@ -5548,14 +5557,14 @@ static function rent_history($option) {
         // wish list
         if (($realestatemanager_configuration['wishlist']['show'])) {
             if (checkAccess_REM($realestatemanager_configuration['wishlist']['registrationlevel'],
-               'RECURSE', userGID_REM($my->id), $acl)) {
+             'RECURSE', userGID_REM($my->id), $acl)) {
                 $params->def('show_add_to_wishlist', 1);
         }
     }
 
     if (($realestatemanager_configuration['rentstatus']['show'])) {
         if (checkAccess_REM($realestatemanager_configuration['rentrequest']['registrationlevel'],
-           'RECURSE', userGID_REM($my->id), $acl)) {
+         'RECURSE', userGID_REM($my->id), $acl)) {
             $params->def('show_rentstatus', 1);
         $params->def('show_rentrequest', 1);
     }
@@ -5563,7 +5572,7 @@ static function rent_history($option) {
 
 if (($realestatemanager_configuration['housestatus']['show'])) {
     if (checkAccess_REM($realestatemanager_configuration['houserequest']['registrationlevel'],
-       'RECURSE', userGID_REM($my->id), $acl)) {
+     'RECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_housestatus', 1);
     $params->def('show_houserequest', 1);
 }
@@ -5575,7 +5584,7 @@ if (($realestatemanager_configuration['housestatus']['show'])) {
 if ($realestatemanager_configuration['reviews']['show']) {
     $params->def('show_reviews', 1);
     if (checkAccess_REM($realestatemanager_configuration['reviews']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_inputreviews', 1);
 }
 }
@@ -5583,7 +5592,7 @@ if ($realestatemanager_configuration['reviews']['show']) {
 if ($realestatemanager_configuration['print_pdf']['show']) {
     $params->def('show_print_pdf', 1);
     if (checkAccess_REM($realestatemanager_configuration['print_pdf']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_input_print_pdf', 1);
 }
 }
@@ -5592,7 +5601,7 @@ if ($realestatemanager_configuration['print_pdf']['show']) {
 if ($realestatemanager_configuration['print_view']['show']) {
     $params->def('show_print_view', 1);
     if (checkAccess_REM($realestatemanager_configuration['print_view']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_input_print_view', 1);
 }
 }
@@ -5601,7 +5610,7 @@ if ($realestatemanager_configuration['print_view']['show']) {
 if ($realestatemanager_configuration['mail_to']['show']) {
     $params->def('show_mail_to', 1);
     if (checkAccess_REM($realestatemanager_configuration['mail_to']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_input_mail_to', 1);
 }
 }
@@ -5610,7 +5619,7 @@ if ($realestatemanager_configuration['mail_to']['show']) {
 if ($realestatemanager_configuration['add_house']['show']) {
     $params->def('show_add_house', 1);
     if (checkAccess_REM($realestatemanager_configuration['add_house']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_input_add_house', 1);
 }
 }
@@ -5619,7 +5628,7 @@ if ($realestatemanager_configuration['add_house']['show']) {
 if ($realestatemanager_configuration['search_option']['show']) {
     $params->def('search_option', 1);
     if (checkAccess_REM($realestatemanager_configuration['search_option']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('search_option_registrationlevel', 1);
 }
 }
@@ -5646,7 +5655,7 @@ $params->def('minifotowidth', $realestatemanager_configuration['foto']['width'])
 if ($realestatemanager_configuration['price']['show']) {
     $params->def('show_pricestatus', 1);
     if (checkAccess_REM($realestatemanager_configuration['price']['registrationlevel'],
-       'NORECURSE', userGID_REM($my->id), $acl)) {
+     'NORECURSE', userGID_REM($my->id), $acl)) {
         $params->def('show_pricerequest', 1);
 }
 }
@@ -5814,7 +5823,7 @@ static function is_exist_subcategory_houses($catid)
           if (($realestatemanager_configuration['add_house']['show'])) {
             $params->def('show_add_house', 1);
             if (checkAccess_REM($realestatemanager_configuration['add_house']['registrationlevel'],
-               'NORECURSE', userGID_REM($my->id), $acl)) {
+             'NORECURSE', userGID_REM($my->id), $acl)) {
                 $params->def('show_input_add_house', 1);
         }
     }
@@ -5825,13 +5834,13 @@ static function is_exist_subcategory_houses($catid)
     }
 
     if (checkAccess_REM($realestatemanager_configuration['rss']['registrationlevel'],
-       'RECURSE', userGID_REM($my->id), $acl) &&
+     'RECURSE', userGID_REM($my->id), $acl) &&
         $realestatemanager_configuration['rss']['show']) {
         $params->def('rss_show', 1);
 }
 
 if (checkAccess_REM($realestatemanager_configuration['ownerslist']['registrationlevel'],
-   'RECURSE', userGID_REM($my->id), $acl) &&
+ 'RECURSE', userGID_REM($my->id), $acl) &&
     $realestatemanager_configuration['ownerslist']['show']) {
     $params->def('ownerslist_show', 1);
 }
